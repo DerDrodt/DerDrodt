@@ -3,9 +3,9 @@ module.exports = {
     title: 'DerDrodt',
     author: 'Daniel Drodt',
     description: 'A blog about everything web.',
-    siteUrl: 'https://gatsby-starter-blog-demo.netlify.com/',
+    siteUrl: 'https://DerDrodt.github.io/',
   },
-  pathPrefix: '/gatsby-starter-blog',
+  pathPrefix: '/',
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
@@ -79,8 +79,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `DerDrodt`,
+        short_name: `DerDrodt`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,

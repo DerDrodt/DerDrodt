@@ -7,7 +7,6 @@ import Layout from '../components/Layout';
 import { rhythm, scale } from '../utils/typography';
 import './blog.css';
 import Badge from '../components/Badge/Badge';
-import { node } from 'prop-types';
 
 class BlogPostTemplate extends React.Component {
   render() {
