@@ -8,12 +8,20 @@ import { rhythm, scale } from '../utils/typography';
 import './blog.css';
 import Badge from '../components/Badge/Badge';
 
+const GITHUB_USERNAME = 'DerDrodt';
+const GITHUB_REPO_NAME = 'DerDrodt';
+
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark;
     const siteTitle = this.props.data.site.siteMetadata.title;
     const siteDescription = post.excerpt;
-    const { previous, next } = this.props.pageContext;
+    const { previous, next, slug } = this.props.pageContext;
+
+    const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/content/${slug.substring(
+      0,
+      slug.length - 1,
+    )}.md`;
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
@@ -35,6 +43,18 @@ class BlogPostTemplate extends React.Component {
         </p>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
         <hr style={{ marginBottom: rhythm(1) }} />
+
+        <p>
+          <a href={editUrl} target="_blank" rel="noopener noreferrer">
+            Edit on GitHub
+          </a>
+        </p>
+        <hr
+          style={{
+            marginBottom: rhythm(1),
+          }}
+        />
+
         <Bio />
 
         <ul
