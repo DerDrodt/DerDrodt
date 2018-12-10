@@ -3,6 +3,8 @@ import { Link } from 'gatsby';
 
 import { rhythm, scale } from '../utils/typography';
 
+import Title from './Title';
+
 class Layout extends React.Component {
   render() {
     const { location, title, children } = this.props;
@@ -24,7 +26,7 @@ class Layout extends React.Component {
               color: 'inherit',
             }}
             to={'/'}>
-            {title}
+            <Title>{title}</Title>
           </Link>
         </h1>
       );
@@ -43,7 +45,7 @@ class Layout extends React.Component {
               color: 'inherit',
             }}
             to={'/'}>
-            {title}
+            <Title>{title}</Title>
           </Link>
         </h3>
       );

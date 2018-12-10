@@ -1,7 +1,7 @@
 ---
 title: Functions
 date: '2018-12-07T23:00:00'
-topic: fop
+topic: FoP
 ---
 
 ## Our own functions!
@@ -42,7 +42,7 @@ We will always get the same result, as if we had just used `*`:
 [[tip | TIP]]
 | Racket already has this square function; it is called `sqr`.
 
-Why is it helpful to create function? Because most functions are a bit more complex than squaring numbers and because we are less prone to errors, if we split our program up in functions. Let's consider this example: We want to calculate the area of a circle (`A = π \* r<sup>2</sup>). This is short enough, we don't really need a function, right? Anywhere we want to use it, we just do this:
+Why is it helpful to create function? Because most functions are a bit more complex than squaring numbers and because we are less prone to errors, if we split our program up in functions. Let's consider this example: We want to calculate the area of a circle (A = π \* r<sup>2</sup>). This is short enough, we don't really need a function, right? Anywhere we want to use it, we just do this:
 
 ```scheme
 ;; ...
@@ -57,4 +57,45 @@ After a few weeks, we copied this code dozens of times across our project with o
 (define (area-of-circle r)
   (* 3.2 r r)
 )
+```
+
+Let's try something a little more complex. We want a function that calculates the absolute value of our input (|x|). For that we have to handle two cases:
+
+- x >= 0
+- x < 0
+
+To do this, we need functions to _control the flow of the program_. In this case, we use the `if`-function.
+
+```scheme
+(define (my-abs x)
+  (if
+    (>= x 0)
+    x
+    (- 0 x)
+  )
+)
+```
+
+The `if`-function takes three arguments. The first one has to be a **boolean**. If that equals `true`, it returns the second argument, otherwise it returns the third one. We **always** have to give three arguments, so the "else"-case is not optional.
+
+`>=` is pretty self explanatory. It takes two numbers. If the first one is greater or equals the second one, it returns `true`, else it returns `false`.
+
+---
+
+Now that we know some basics, let's implement a simple calculater. It takes an operator symbol and two numbers and calulates the result based on the operator. To compare two symbols, we can use the `symbol=?`-function that returns true, iff both symbols are the same. We could implement this using `if` like before, but that would result in a lot of hard to read code. Instead, we will use `cond`. `cond` is somewhat similiar to `switch`-statements in other languages, like Java. It goes through all the cases we give it and if one's condition is true, it will return this cases expression. A case is written as `[condition expression]`.
+
+```scheme
+(define (simple-calculator op left-op right-op)
+  (cond
+    [(symbol=? op '+) (+ left-op right-op)]
+    [(symbol=? op '-) (- left-op right-op)]
+    [(symbol=? op '*) (* left-op right-op)]
+    [(symbol=? op '/) (/ left-op right-op)]
+  )
+)
+
+(simple-calculator '- 8 3)
+> 5
+(simple-calculator '* 8 3)
+> 24
 ```

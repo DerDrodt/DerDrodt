@@ -1,0 +1,15 @@
+.btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: #007acc;
+  border-radius: 5px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.selected {
+  background-color: #007acc15;
+}

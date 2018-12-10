@@ -1,7 +1,7 @@
 ---
 title: Introduction to Racket
 date: '2018-12-03T23:00:00'
-topic: fop
+topic: FoP
 ---
 
 ## The Basics

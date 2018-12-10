@@ -1,0 +1,44 @@
+.custom-block {
+  padding: 0.1rem 1.5rem;
+  border-left-width: 0.5rem;
+  border-left-style: solid;
+  margin: 1rem 0;
+
+  &-heading {
+    font-weight: 600;
+  }
+
+  &-tip {
+    background-color: #f3f5f7;
+    border-color: #42b983;
+  }
+  &-warning {
+    background-color: rgba(255, 229, 100, 0.3);
+    border-color: #e7c000;
+    color: #6b5900;
+
+    .custom-block-heading {
+      color: #b29400;
+    }
+  }
+
+  &-danger {
+    background-color: #ffe6e6;
+    border-color: #c00;
+    color: #4d0000;
+
+    .custom-block-heading {
+      color: #900;
+    }
+  }
+}
+
+.custom-block-body {
+  p {
+    margin: 0 0 8px 0;
+  }
+}
+
+ul {
+  margin: 0 0 0 1.75rem;
+}

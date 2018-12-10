@@ -1,11 +1,12 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { Link, graphql } from 'gatsby';
+import kebabcase from 'lodash.kebabcase';
 
 import Bio from '../components/Bio';
 import Layout from '../components/Layout';
 import { rhythm, scale } from '../utils/typography';
-import './blog.css';
+import './blog.scss';
 import Badge from '../components/Badge/Badge';
 
 const GITHUB_USERNAME = 'DerDrodt';
@@ -16,7 +17,14 @@ class BlogPostTemplate extends React.Component {
     const post = this.props.data.markdownRemark;
     const siteTitle = this.props.data.site.siteMetadata.title;
     const siteDescription = post.excerpt;
-    const { previous, next, slug } = this.props.pageContext;
+    const {
+      previous,
+      next,
+      slug,
+      topic,
+      previousInTopic,
+      nextInTopic,
+    } = this.props.pageContext;
 
     const editUrl = `https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/edit/master/content/${slug.substring(
       0,
@@ -38,10 +46,31 @@ class BlogPostTemplate extends React.Component {
             marginBottom: rhythm(1),
             marginTop: rhythm(-1),
           }}>
-          <Badge>{post.frontmatter.topic}</Badge>
+          <Link
+            style={{ boxShadow: 'none' }}
+            to={`/topic/${kebabcase(post.frontmatter.topic.toLowerCase())}`}>
+            <Badge>{post.frontmatter.topic}</Badge>
+          </Link>
           {post.frontmatter.date} • {post.timeToRead} min read
         </p>
+        {previousInTopic && (
+          <p>
+            <Link to={previousInTopic.fields.slug}>My previous post in </Link>
+            <Link
+              style={{ boxShadow: 'none' }}
+              to={`/topic/${kebabcase(post.frontmatter.topic.toLowerCase())}`}>
+              <Badge>{topic}</Badge>
+            </Link>
+          </p>
+        )}
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        {nextInTopic && (
+          <p>
+            <Link to={nextInTopic.fields.slug}>
+              My next post in <Badge>{topic}</Badge>
+            </Link>
+          </p>
+        )}
         <hr style={{ marginBottom: rhythm(1) }} />
 
         <p>
@@ -49,11 +78,7 @@ class BlogPostTemplate extends React.Component {
             Edit on GitHub
           </a>
         </p>
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
+        <hr style={{ marginBottom: rhythm(1) }} />
 
         <Bio />
 

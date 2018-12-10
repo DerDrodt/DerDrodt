@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: 'DerDrodt',
     author: 'Daniel Drodt',
-    description: 'A blog about everything web.',
+    description: 'A blog about everything web. By Daniel Drodt',
     siteUrl: 'https://DerDrodt.github.io/',
   },
   pathPrefix: '/',
@@ -66,6 +66,9 @@ module.exports = {
           'gatsby-remark-smartypants',
         ],
       },
+    },
+    {
+      resolve: 'gatsby-plugin-sass',
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

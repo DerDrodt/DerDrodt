@@ -1,7 +1,7 @@
 ---
 title: Introduction to FoP
 date: '2018-12-02T22:00:00'
-topic: fop
+topic: FoP
 ---
 
 In this series of blog posts, we will examine and learn the contents of the basics of the lecture "Funktionale und objektorientierte Programmierkonzepte" from the TU Darmstadt.

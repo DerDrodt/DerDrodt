@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './Badge.module.css';
+import style from './Badge.module.scss';
 
 export default ({ children, type = 'tip', vertical }) => (
   <span

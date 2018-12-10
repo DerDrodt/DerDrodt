@@ -1,29 +1,26 @@
 import React from 'react';
-import { Link, graphql } from 'gatsby';
 import Helmet from 'react-helmet';
-import kebabcase from 'lodash.kebabcase';
+import { graphql, Link } from 'gatsby';
 
-import Bio from '../components/Bio';
 import Layout from '../components/Layout';
 import { rhythm } from '../utils/typography';
 import Badge from '../components/Badge/Badge';
 
-class BlogIndex extends React.Component {
+export default class extends React.Component {
   render() {
-    const { data } = this.props;
-    const siteTitle = data.site.siteMetadata.title;
-    const siteDescription = data.site.siteMetadata.description;
-    const posts = data.allMarkdownRemark.edges;
+    const siteTitle = this.props.data.site.siteMetadata.title;
+    const topic = this.props.pageContext.topic;
+    const siteDescription = `All my posts about ${topic}!`;
+    const posts = this.props.data.allMarkdownRemark.edges;
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <Helmet
           htmlAttributes={{ lang: 'en' }}
           meta={[{ name: 'description', content: siteDescription }]}
-          title={siteTitle}
+          title={`${topic} | ${siteTitle}`}
         />
-        <Bio />
-        <h2>Latest Posts</h2>
+        <h1>{topic}</h1>
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug;
           return (
@@ -34,13 +31,7 @@ class BlogIndex extends React.Component {
                 </Link>
               </h3>
               <small>
-                <Link
-                  style={{ boxShadow: 'none' }}
-                  to={`/topic/${kebabcase(
-                    node.frontmatter.topic.toLowerCase(),
-                  )}`}>
-                  <Badge>{node.frontmatter.topic}</Badge>
-                </Link>
+                <Badge>{topic}</Badge>
                 {node.frontmatter.date} • {node.timeToRead} min read
               </small>
               <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
@@ -52,28 +43,29 @@ class BlogIndex extends React.Component {
   }
 }
 
-export default BlogIndex;
-
 export const pageQuery = graphql`
-  query {
+  query BlogPostsByTopic($topic: String!) {
     site {
       siteMetadata {
         title
-        description
+        author
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      filter: { frontmatter: { topic: { eq: $topic } } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
       edges {
         node {
+          id
           excerpt
+          timeToRead
           fields {
             slug
           }
-          timeToRead
           frontmatter {
             date(formatString: "DD MMMM YYYY")
             title
-            topic
           }
         }
       }
