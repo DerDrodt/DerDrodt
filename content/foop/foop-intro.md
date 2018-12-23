@@ -4,7 +4,7 @@ date: '2018-12-02T22:00:00'
 topic: FOOP
 ---
 
-In this series of blog posts, we will learn how and why and how to program, by looking at the two most popular wys of programming: **F**unctional and **O**bject **O**riented **P**rogramming. We'll both look at the theory behind it and write actual code.
+In this series of blog posts, we will learn how and why and how to program, by looking at the two most popular ways of programming: **F**unctional and **O**bject **O**riented **P**rogramming. We'll both look at the theory behind it and write actual code.
 
 The languages we will look at, are _Racket_ (or rather HtDP-TL) on the functional side and Java on the OOP side.
 
