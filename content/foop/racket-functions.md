@@ -66,7 +66,7 @@ Let's try something a little more complex. We want a function that calculates th
 
 To do this, we need functions to _control the flow of the program_. In this case, we use the `if`-function.
 
-```scheme
+```scheme{2-6}
 (define (my-abs x)
   (if
     (>= x 0)
@@ -102,3 +102,37 @@ Now that we know some basics, let's implement a simple calculator. It takes an o
 (simple-calculator '* 8 3)
 > 24
 ```
+
+## Testing
+
+Before we can really start to write code, we have to learn about one more important thing when it comes to writing code, _testing_.
+
+![Writing tests](tests.jpg)
+
+To verify that the code we write works as expected, we have to write some test, that compares what we expect to what our function actually returns. In Racket, testing is fairly easy and is — as expected — done through functions. The functions for testing are `check-expect`, `check-within` and `check-error`.
+
+`check-expect` is used when you want to check that what your function returns is **exactly** equal to what you expect. To test our calculator for example, we would write this:
+
+```scheme{5}
+(define (simple-calculator op left-op right-op)
+  ;; As above
+)
+
+(check-expect (simple-calculator '- 8 3) 5)
+```
+
+`check-within` is useful for testing floating-point numbers. Because we often can't or don't want to write all decimal places and because computers cannot always calculate these number **exactly** right, we can tell Racket that we expect our value to be approximately correct. To do that we give a third parameter — our range.
+
+```scheme{5}
+(define (simple-calculator op left-op right-op)
+  ;; As above
+)
+
+(check-within (simple-calculator '/ 1 3) 0.3333 .0001)
+```
+
+This will only succeed, if our returned value is somewhere between 0.3332 and 0.3334.
+
+We will look at `check-error` later, when we learn about errors.
+
+Any time we run our code, DrRacket will automatically run our tests and notify us when something went wrong.
